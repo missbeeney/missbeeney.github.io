@@ -52,10 +52,16 @@
     document.getElementById("planOutput").innerHTML = "<h3>Generated Plan:</h3><ul>" + plan.join("") + "</ul>";
   });
 
-  function generatePlan(count, exercises) {
+ function generatePlan(count, exercises) {
     var plan = [];
-    for (var i = 0; i < count; i++) {
-      var randomIndex = Math.floor(Math.random() * exercises.length);
+    var usedIndices = [];
+    var uniqueExercises = Math.min(count, exercises.length);
+    for (var i = 0; i < uniqueExercises; i++) {
+      var randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * exercises.length);
+      } while (usedIndices.includes(randomIndex));
+      usedIndices.push(randomIndex);
       var exercise = exercises[randomIndex];
       var reps = Math.floor(Math.random() * (exercise.repsRange[1] - exercise.repsRange[0] + 1)) + exercise.repsRange[0];
       plan.push("<li>" + exercise.name + ": " + reps + " reps</li>");
