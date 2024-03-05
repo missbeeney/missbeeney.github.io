@@ -20,7 +20,8 @@
   <h2>Conditioning Roulette</h2>
   <p>Are you brave enough to play?</p>
   <form id="exerciseForm">
-    <label for="exerciseCount">How many exercises do you want to generate?</label><br>
+    <label for="exerciseCount">How many exercises do you want to generate?</label><br><br>
+          
     <input type="number" id="exerciseCount" name="exerciseCount" min="1" required><br><br>
     <button type="submit">Create my plan</button>
   </form>
@@ -32,9 +33,18 @@
     event.preventDefault();
     var exerciseCount = parseInt(document.getElementById("exerciseCount").value);
     var exercises = [
-      { name: "hocks sit ups", repsRange: [5, 10] },
-      { name: "beats", repsRange: [5, 10] },
-      { name: "tucks", repsRange: [7, 15] }
+      { name: "Hocks sit ups", repsRange: [5, 10] },
+      { name: "Beats", repsRange: [5, 12] },
+      { name: "Hanging Leg Raise (Tuck or straight)", repsRange: [7, 15] },
+      { name: "Bottom bar pull ups", repsRange: [5, 10] },
+      { name: "Leg claps - long and short arm!", repsRange: [3, 7] },
+      { name: "Mushroom tucks", repsRange: [3, 5] },
+      { name: "Pike pull up", repsRange: [3, 8] },
+      { name: "Skin the cat", repsRange: [2, 6] },
+      { name: "Helicopter dismounts - slooooow!", repsRange: [2, 6] },
+      { name: "Side mount switches", repsRange: [4, 12] },
+      { name: "Monkey climb", repsRange: [1, 3] },
+      { name: "Mermaid switches", repsRange: [1, 4] },
       // Add more exercises here if needed
     ];
 
