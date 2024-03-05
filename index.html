@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoop Conditioning Roulette</title>
+    <style>
+        body {
+            background-color: #FFDDF4; /* Pale pink color */
+        }
+        .script-font {
+            font-family: 'Dancing Script', cursive;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 class="script-font">Pussycat Circus</h1>
+    <h2>Hoop Conditioning Roulette</h2>
+    <p>Are you brave enough to play?</p>
+    <label for="minReps">Minimum Reps:</label>
+    <input type="number" id="minReps" min="1" max="10" value="1">
+    <label for="maxReps">Maximum Reps:</label>
+    <input type="number" id="maxReps" min="1" max="10" value="10">
+    <button onclick="runGame()">Shoot me now</button>
+    <div id="output"></div>
+    <hr>
+    <h3>Add New Move</h3>
+    <input type="text" id="newMove">
+    <button onclick="addMove()">Add Move</button>
+    <button onclick="listAllExercises()">List all exercises</button>
+    <div id="deleteSection" style="display: none;">
+        <hr>
+        <h3>Delete Exercise</h3>
+        <input type="text" id="deleteExercise">
+        <button onclick="deleteExercise()">Delete Exercise</button>
+        <p id="deleteError" style="color: red; display: none;">Exercise not found</p>
+    </div>
+
+    <script>
+        var exercises = ["hocks sit ups", "beats", "tucks"];
+
+        function runGame() {
+            var minReps = parseInt(document.getElementById("minReps").value);
+            var maxReps = parseInt(document.getElementById("maxReps").value);
+            var randomReps = Math.floor(Math.random() * (maxReps - minReps + 1)) + minReps;
+            var randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
+
+            var outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "<p>You have to do " + randomReps + " reps of " + randomExercise + "!</p>";
+        }
+
+        function addMove() {
+            var newMove = document.getElementById("newMove").value;
+            if (newMove.trim() !== "") {
+                exercises.push(newMove);
+                document.getElementById("newMove").value = "";
+                alert("New move added successfully!");
+            } else {
+                alert("Please enter a valid move name!");
+            }
+        }
+
+        function listAllExercises() {
+            var outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "<p><strong>All Exercises:</strong></p><ul>";
+            for (var i = 0; i < exercises.length; i++) {
+                outputDiv.innerHTML += "<li>" + (i + 1) + ". " + exercises[i] + "</li>";
+            }
+            outputDiv.innerHTML += "</ul>";
+            document.getElementById("deleteSection").style.display = "block";
+        }
+
+        function deleteExercise() {
+            var exerciseToDelete = document.getElementById("deleteExercise").value.toLowerCase();
+            var index = exercises.findIndex(function(exercise) {
+                return exercise.toLowerCase() === exerciseToDelete;
+            });
+            if (index !== -1) {
+                exercises.splice(index, 1);
+                listAllExercises();
+                document.getElementById("deleteError").style.display = "none";
+            } else {
+                document.getElementById("deleteError").style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
