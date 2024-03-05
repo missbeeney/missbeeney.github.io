@@ -38,7 +38,24 @@
     </div>
 
     <script>
-        var exercises = ["hocks sit ups", "beats", "tucks"];
+        // Function to fetch and read exercises from file
+        async function fetchExercises() {
+            try {
+                const response = await fetch('exercises.txt');
+                const data = await response.text();
+                return data.split('\n').map(line => line.trim()).filter(line => line !== '');
+            } catch (error) {
+                console.error('Error fetching exercises:', error);
+                return [];
+            }
+        }
+
+        var exercises = [];
+
+        // Load exercises when the page loads
+        window.onload = async function() {
+            exercises = await fetchExercises();
+        };
 
         function runGame() {
             var minReps = parseInt(document.getElementById("minReps").value);
