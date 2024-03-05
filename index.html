@@ -1,106 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoop Conditioning Roulette</title>
-    <style>
-        body {
-            background-color: #FFDDF4; /* Pale pink color */
-        }
-        .script-font {
-            font-family: 'Dancing Script', cursive;
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pussycat Circus</title>
+<style>
+  body {
+    background-color: #fce4ec; /* Pale pink */
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  h1 {
+    font-family: "Script MT Bold", cursive;
+  }
+</style>
 </head>
 <body>
-    <h1 class="script-font">Pussycat Circus</h1>
-    <h2>Hoop Conditioning Roulette</h2>
-    <p>Are you brave enough to play?</p>
-    <label for="minReps">Minimum Reps:</label>
-    <input type="number" id="minReps" min="1" max="10" value="1">
-    <label for="maxReps">Maximum Reps:</label>
-    <input type="number" id="maxReps" min="1" max="10" value="10">
-    <button onclick="runGame()">Shoot me now</button>
-    <div id="output"></div>
-    <hr>
-    <h3>Add New Move</h3>
-    <input type="text" id="newMove">
-    <button onclick="addMove()">Add Move</button>
-    <button onclick="listAllExercises()">List all exercises</button>
-    <div id="deleteSection" style="display: none;">
-        <hr>
-        <h3>Delete Exercise</h3>
-        <input type="text" id="deleteExercise">
-        <button onclick="deleteExercise()">Delete Exercise</button>
-        <p id="deleteError" style="color: red; display: none;">Exercise not found</p>
-    </div>
+<div class="container">
+  <h1>Pussycat Circus</h1>
+  <h2>Conditioning Roulette</h2>
+  <p>Are you brave enough to play?</p>
+  <form id="exerciseForm">
+    <label for="exerciseCount">How many exercises do you want to generate?</label><br>
+    <input type="number" id="exerciseCount" name="exerciseCount" min="1" required><br><br>
+    <button type="submit">Create my plan</button>
+  </form>
+  <div id="planOutput"></div>
+</div>
 
-    <script>
-        // Function to fetch and read exercises from file
-        async function fetchExercises() {
-            try {
-                const response = await fetch('exercises.txt');
-                const data = await response.text();
-                return data.split('\n').map(line => line.trim()).filter(line => line !== '');
-            } catch (error) {
-                console.error('Error fetching exercises:', error);
-                return [];
-            }
-        }
+<script>
+  document.getElementById("exerciseForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var exerciseCount = parseInt(document.getElementById("exerciseCount").value);
+    var exercises = [
+      { name: "hocks sit ups", repsRange: [5, 10] },
+      { name: "beats", repsRange: [5, 10] },
+      { name: "tucks", repsRange: [7, 15] }
+      // Add more exercises here if needed
+    ];
 
-        var exercises = [];
+    var plan = generatePlan(exerciseCount, exercises);
+    document.getElementById("planOutput").innerHTML = "<h3>Generated Plan:</h3><ul>" + plan.join("") + "</ul>";
+  });
 
-        // Load exercises when the page loads
-        window.onload = async function() {
-            exercises = await fetchExercises();
-        };
-
-        function runGame() {
-            var minReps = parseInt(document.getElementById("minReps").value);
-            var maxReps = parseInt(document.getElementById("maxReps").value);
-            var randomReps = Math.floor(Math.random() * (maxReps - minReps + 1)) + minReps;
-            var randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
-
-            var outputDiv = document.getElementById("output");
-            outputDiv.innerHTML = "<p>You have to do " + randomReps + " reps of " + randomExercise + "!</p>";
-        }
-
-        function addMove() {
-            var newMove = document.getElementById("newMove").value;
-            if (newMove.trim() !== "") {
-                exercises.push(newMove);
-                document.getElementById("newMove").value = "";
-                alert("New move added successfully!");
-            } else {
-                alert("Please enter a valid move name!");
-            }
-        }
-
-        function listAllExercises() {
-            var outputDiv = document.getElementById("output");
-            outputDiv.innerHTML = "<p><strong>All Exercises:</strong></p><ul>";
-            for (var i = 0; i < exercises.length; i++) {
-                outputDiv.innerHTML += "<li>" + (i + 1) + ". " + exercises[i] + "</li>";
-            }
-            outputDiv.innerHTML += "</ul>";
-            document.getElementById("deleteSection").style.display = "block";
-        }
-
-        function deleteExercise() {
-            var exerciseToDelete = document.getElementById("deleteExercise").value.toLowerCase();
-            var index = exercises.findIndex(function(exercise) {
-                return exercise.toLowerCase() === exerciseToDelete;
-            });
-            if (index !== -1) {
-                exercises.splice(index, 1);
-                listAllExercises();
-                document.getElementById("deleteError").style.display = "none";
-            } else {
-                document.getElementById("deleteError").style.display = "block";
-            }
-        }
-    </script>
+  function generatePlan(count, exercises) {
+    var plan = [];
+    for (var i = 0; i < count; i++) {
+      var randomIndex = Math.floor(Math.random() * exercises.length);
+      var exercise = exercises[randomIndex];
+      var reps = Math.floor(Math.random() * (exercise.repsRange[1] - exercise.repsRange[0] + 1)) + exercise.repsRange[0];
+      plan.push("<li>" + exercise.name + ": " + reps + " reps</li>");
+    }
+    return plan;
+  }
+</script>
 </body>
 </html>
