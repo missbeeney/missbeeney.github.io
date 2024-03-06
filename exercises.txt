@@ -1,16 +1,26 @@
-Hocks sit ups
-Bottom bar pull ups
-leg claps
-mushroom tucks
-Pike pull ups
-Hanging knee raise
-1 leg hocks/around the world
-Shoulder shrugs
-Front balance raise
-Beats
-Skin the cat
-Helicopter dismounts - slooooow!
-Side mount switches
-Amazon leg raise
-Monkey climb
-Mermaid switches
+ var exercises = [
+      { name: "Hocks sit ups", repsRange: [5, 10] },
+      { name: "Beats", repsRange: [5, 12] },
+      { name: "Hanging Leg Raise (Tuck or straight)", repsRange: [7, 15] },
+      { name: "Bottom bar chin ups - nails and knuckles!", repsRange: [5, 10] },
+      { name: "Leg claps - long and short arm!", repsRange: [3, 7] },
+      { name: "Mushroom tucks", repsRange: [3, 5] },
+      { name: "Pike pull up", repsRange: [3, 8] },
+      { name: "Skin the cat", repsRange: [2, 6] },
+      { name: "Helicopter dismounts - slooooow!", repsRange: [2, 6] },
+      { name: "Side mount switches", repsRange: [4, 12] },
+      { name: "Monkey climb/Climb to Flying bird", repsRange: [1, 3] },
+      { name: "Mermaid switches", repsRange: [1, 4] },
+      { name: "Rolling pins", repsRange: [6, 12] },
+      { name: "Seated pull ups top bar", repsRange: [5, 10] },
+      { name: "1 leg hocks/around the world", repsRange: [2, 5] },
+      { name: "Leg squeezes to bum", repsRange: [5, 10] },
+      { name: "Front balance lifts", repsRange: [3, 7] },
+      { name: "Meat hook - both sides", repsRange: [2, 5] },
+      { name: "Shoulder shrugs", repsRange: [7, 15] },
+      { name: "*Layback pull ups - feet on floor", repsRange: [5, 10] },
+      { name: "*Pistol Squat", repsRange: [5, 10] },
+      { name: "*Toe Taps", repsRange: [5, 10] },
+      { name: "*Straddle leg lifts", repsRange: [5, 10] }
+      // Add more exercises here if needed
+    ];
