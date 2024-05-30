@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Reps Range</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .record {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exercise Reps Range Input</h1>
+
+    <div class="form-container">
+        <label for="name">Exercise Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="min-reps">Min Reps:</label>
+        <input type="number" id="min-reps" name="min-reps" required>
+        <br>
+        <label for="max-reps">Max Reps:</label>
+        <input type="number" id="max-reps" name="max-reps" required>
+        <br>
+        <button onclick="addRecord()">Add Record</button>
+    </div>
+
+    <h2>Exercise Records:</h2>
+    <div id="records-container"></div>
+
+    <script>
+        function addRecord() {
+            const name = document.getElementById('name').value;
+            const minReps = parseInt(document.getElementById('min-reps').value, 10);
+            const maxReps = parseInt(document.getElementById('max-reps').value, 10);
+
+            if (name && !isNaN(minReps) && !isNaN(maxReps)) {
+                const recordContainer = document.getElementById('records-container');
+                const record = document.createElement('div');
+                record.className = 'record';
+                record.textContent = `{name: "${name}", reps range: [${minReps}, ${maxReps}]}`;
+                recordContainer.appendChild(record);
+
+                document.getElementById('name').value = '';
+                document.getElementById('min-reps').value = '';
+                document.getElementById('max-reps').value = '';
+            } else {
+                alert('Please enter valid inputs for all fields.');
+            }
+        }
+    </script>
+
+</body>
+</html>
