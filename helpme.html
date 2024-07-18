@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Support Queue</title>
+    <style>
+        .queue-item { padding: 10px; margin: 5px 0; border-radius: 5px; }
+        .support { background-color: red; color: white; }
+        .marking { background-color: green; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Class Support Queue</h1>
+
+    <div>
+        <label for="class-code">Enter Class Code:</label>
+        <input type="text" id="class-code">
+        <button onclick="joinClass()">Join Class</button>
+    </div>
+
+    <div id="queue-section" style="display:none;">
+        <h2>Queue for Class <span id="class-display"></span></h2>
+        <div>
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name">
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name">
+            <label for="request-type">Request Type:</label>
+            <select id="request-type">
+                <option value="support">Support</option>
+                <option value="marking">Marking</option>
+            </select>
+            <label for="description">Description:</label>
+            <input type="text" id="description">
+            <button onclick="submitRequest()">Submit Request</button>
+        </div>
+
+        <h3>Current Queue</h3>
+        <div id="queue-list"></div>
+    </div>
+
+    <script src="queue.js"></script>
+</body>
+</html>
