@@ -86,4 +86,28 @@
     <h2>All Videos:</h2>
     <p class="video-item"><a href="https://example.com/video1" class="hidden-video-link">Video 1: Introduction to Coding</a></p>
     <p class="video-item"><a href="https://example.com/video2" class="hidden-video-link">Video 2: HTML Basics</a></p>
-    <p class="video
+    <p class="video-item"><a href="https://example.com/video3" class="hidden-video-link">Video 3: CSS Fundamentals</a></p>
+    <p class="video-item"><a href="https://example.com/video4" class="hidden-video-link">Video 4: JavaScript Essentials</a></p>
+    <p class="video-item"><a href="https://example.com/video5" class="hidden-video-link">Video 5: Advanced CSS Techniques</a></p>
+</div>
+
+<script>
+    function unlockVideos() {
+        const password = document.getElementById("password").value;
+        const correctPassword = "yourpassword"; // Replace with your desired password
+        
+        if (password === correctPassword) {
+            document.getElementById("hidden-videos").style.display = "block";
+            document.getElementById("password-section").style.display = "none"; // Optionally hide the password section
+            
+            // Change link colors to blue
+            const links = document.querySelectorAll(".hidden-video-link");
+            links.forEach(link => link.classList.add("visible"));
+        } else {
+            alert("Incorrect password, please try again.");
+        }
+    }
+</script>
+
+</body>
+</html>
