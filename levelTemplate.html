@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pussycat Poles</title>
+    <style>
+        /* General page styling */
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 600px; 
+            margin: auto; 
+            padding: 20px; 
+            background-color: #FADADD; /* Pale pink background */
+            color: #333; /* Dark grey text for readability */
+        }
+        
+        /* Styling the main title */
+        h1 { 
+            text-align: center; 
+            font-family: 'Brush Script MT', cursive; /* Script font for title */
+            font-size: 2.5em; /* Increase font size for emphasis */
+            color: #D02090; /* Dark pink text color */
+            margin-bottom: 10px;
+        }
+        
+        /* Styling the subheading */
+        h2 { 
+            text-align: center; 
+            font-family: Arial, sans-serif; /* Sans-serif font for subheading */
+            font-size: 1.5em; 
+            color: #333; /* Dark grey text */
+            margin-top: 0;
+        }
+        
+        /* Styling for video list items */
+        .video-list, #hidden-videos { 
+            margin-bottom: 20px; 
+        }
+        
+        .video-item { 
+            margin: 10px 0; 
+        }
+        
+        /* Password section styling */
+        #password-section { 
+            text-align: center; 
+            margin-top: 20px; 
+        }
+        
+        /* Styling for the unlock button */
+        .reveal-button { 
+            padding: 10px 15px; 
+            font-size: 16px; 
+            color: #fff; 
+            background-color: #D02090; /* Dark pink button color */
+            border: none; 
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .reveal-button:hover {
+            background-color: #C71585; /* Slightly darker on hover */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pussycat Poles</h1>
+<h2>Level X</h2>
+
+<div class="video-list">
+    <p class="video-item">Video 1: Introduction to Coding</p>
+    <p class="video-item">Video 2: HTML Basics</p>
+    <p class="video-item">Video 3: CSS Fundamentals</p>
+</div>
+
+<div id="password-section">
+    <input type="password" id="password" placeholder="Enter password">
+    <button class="reveal-button" onclick="unlockVideos()">Unlock Videos</button>
+</div>
+
+<div id="hidden-videos">
+    <h2>All Videos:</h2>
+    <p class="video-item">Video 1: Introduction to Coding - [link to video]</p>
+    <p class="video-item">Video 2: HTML Basics - [link to video]</p>
+    <p class="video-item">Video 3: CSS Fundamentals - [link to video]</p>
+    <p class="video-item">Video 4: JavaScript Essentials - [link to video]</p>
+    <p class="video-item">Video 5: Advanced CSS Techniques - [link to video]</p>
+</div>
+
+<script>
+    function unlockVideos() {
+        const password = document.getElementById("password").value;
+        const correctPassword = "yourpassword"; // Replace with your desired password
+        
+        if (password === correctPassword) {
+            document.getElementById("hidden-videos").style.display = "block";
+            document.getElementById("password-section").style.display = "none"; // Optionally hide the password section
+        } else {
+            alert("Incorrect password, please try again.");
+        }
+    }
+</script>
+
+</body>
+</html>
