@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pussycat Poles</title>
+    <style>
+        /* General page styling */
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 600px; 
+            margin: auto; 
+            padding: 20px; 
+            background-color: #FADADD; /* Pale pink background */
+            color: #333; /* Dark grey text for readability */
+        }
+        
+        /* Styling the main title */
+        h1 { 
+            text-align: center; 
+            font-family: 'Brush Script MT', cursive; /* Script font for title */
+            font-size: 2.5em; /* Increase font size for emphasis */
+            color: #D02090; /* Dark pink text color */
+            margin-bottom: 10px;
+        }
+        
+        /* Styling the subheading */
+        h2 { 
+            text-align: center; 
+            font-family: Arial, sans-serif; /* Sans-serif font for subheading */
+            font-size: 1.5em; 
+            color: #333; /* Dark grey text */
+            margin-top: 0;
+        }
+        
+        /* Password section styling */
+        #password-section { 
+            text-align: center; 
+            margin-top: 20px; 
+        }
+        
+        /* Styling for the unlock button */
+        .reveal-button { 
+            padding: 10px 15px; 
+            font-size: 16px; 
+            color: #fff; 
+            background-color: #D02090; /* Dark pink button color */
+            border: none; 
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .reveal-button:hover {
+            background-color: #C71585; /* Slightly darker on hover */
+        }
+
+        /* Hidden links styling */
+        .hidden-video-link {
+            color: #FADADD; /* Initially matches the background, making it invisible */
+            text-decoration: none;
+        }
+        
+        /* Visible links styling (will be applied on password success) */
+        .visible {
+            color: blue; /* Turns blue when the correct password is entered */
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pussycat Poles</h1>
+<h2>Level X</h2>
+
+<div class="video-list">
+    <p class="video-item">Video 1: Introduction to Coding</p>
+    <p class="video-item">Video 2: HTML Basics</p>
+    <p class="video-item">Video 3: CSS Fundamentals</p>
+</div>
+
+<div id="password-section">
+    <input type="password" id="password" placeholder="Enter password">
+    <button class="reveal-button" onclick="unlockVideos()">Unlock Videos</button>
+</div>
+
+<div id="hidden-videos" style="display: none;">
+    <h2>All Videos:</h2>
+    <p class="video-item"><a href="https://example.com/video1" class="hidden-video-link">Video 1: Introduction to Coding</a></p>
+    <p class="video-item"><a href="https://example.com/video2" class="hidden-video-link">Video 2: HTML Basics</a></p>
+    <p class="video
