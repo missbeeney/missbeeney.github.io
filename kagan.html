@@ -30,6 +30,10 @@
       border: 1px solid #2e4e1e;
       border-radius: 5px;
     }
+    .download-initial {
+      display: block;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -49,16 +53,18 @@
   
   <a id="downloadLink" style="display: none;">Download Updated CSV</a>
   
+  <a id="downloadInitialCSV" class="download-initial" href="#">Download Blank Initial CSV</a>
+  
   <div id="output">
     <div class="instructions">
       <h2>Instructions:</h2>
       <p>Please ensure the CSV file is structured as follows:</p>
       <ul>
-        <li>Include the following columns: <strong>first name, surname, score_1, score_2, ...</strong></li>
+        <li>Include the following columns: <strong>first name, surname, score_1</strong></li>
         <li>Optionally include columns for previous groups, e.g., <strong>group_1, group_2, ...</strong></li>
         <li>Each student should have a unique combination of first name and surname.</li>
-        <li>The highest numbered <strong>score_x</strong> column will be used to create groups.</li>
       </ul>
+      <p>Click the "Download Blank Initial CSV" button to get a preformatted file.</p>
       <p>After uploading, the groups will be displayed here.</p>
     </div>
   </div>
@@ -154,6 +160,18 @@
       downloadLink.style.display = "inline";
       downloadLink.textContent = "Download Updated CSV";
     }
+
+    document.getElementById("downloadInitialCSV").addEventListener("click", () => {
+      const headers = ["first name", "surname", "score_1"];
+      const blankCSV = Papa.unparse([headers]);
+      const blob = new Blob([blankCSV], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+
+      const downloadLink = document.createElement("a");
+      downloadLink.href = url;
+      downloadLink.download = "blank_initial.csv";
+      downloadLink.click();
+    });
   </script>
 </body>
 </html>
