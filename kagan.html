@@ -30,6 +30,17 @@
       border: 1px solid #2e4e1e;
       border-radius: 5px;
     }
+    .login-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .login-icon img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%; /* Makes the image circular */
+      border: 2px solid #2e4e1e; /* Adds a border */
+    }
     .download-initial {
       display: block;
       margin-top: 10px;
@@ -37,6 +48,14 @@
   </style>
 </head>
 <body>
+  <!-- Login Icon -->
+  <div class="login-icon">
+    <a href="#" title="Login">
+      <img src="https://hadlowpc.co.uk/wp-content/uploads/2020/03/hadlow-rural-community-school-1.jpg" alt="Login Icon" />
+    </a>
+  </div>
+
+  <!-- Main Content -->
   <h1>Kagan Groups Generator</h1>
   
   <label for="csvFile">Upload CSV File:</label>
@@ -68,7 +87,7 @@
       <p>After uploading, the groups will be displayed here.</p>
     </div>
   </div>
-  
+
   <script>
     document.getElementById("generateGroups").addEventListener("click", () => {
       const fileInput = document.getElementById("csvFile");
@@ -118,7 +137,7 @@
       groups.forEach((group, index) => {
         const color = colors[index % colors.length];
         group.forEach(student => {
-          student[latestGroup] = color;
+          student[`group_${groupColumns.length + 1}`] = color;
         });
       });
 
