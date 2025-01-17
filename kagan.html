@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kagan Groups Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fdfde6; /* Pale yellow */
+      color: #2e4e1e; /* Dark green */
+      margin: 20px;
+    }
+    h1 {
+      color: #2e4e1e;
+    }
+    #output {
+      margin-top: 20px;
+    }
+    .instructions {
+      padding: 10px;
+      border: 1px solid #2e4e1e;
+      border-radius: 5px;
+      background-color: #ffffff;
+    }
+    .group {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #2e4e1e;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kagan Groups Generator</h1>
+  
+  <label for="csvFile">Upload CSV File:</label>
+  <input type="file" id="csvFile" accept=".csv" />
+  
+  <label for="groupSize">Group Size:</label>
+  <select id="groupSize">
+    <option value="4" selected>4</option>
+    <option value="3">3</option>
+    <option value="5">5</option>
+  </select>
+  
+  <button id="generateGroups">Generate New Groups</button>
+  
+  <a id="downloadLink" style="display: none;">Download Updated CSV</a>
+  
+  <div id="output">
+    <div class="instructions">
+      <h2>Instructions:</h2>
+      <p>Please ensure the CSV file is structured as follows:</p>
+      <ul>
+        <li>Include the following columns: <strong>first name, surname, score_1, score_2, ...</strong></li>
+        <li>Optionally include columns for previous groups, e.g., <strong>group_1, group_2, ...</strong></li>
+        <li>Each student should have a unique combination of first name and surname.</li>
+        <li>The highest numbered <strong>score_x</strong> column will be used to create groups.</li>
+      </ul>
+      <p>After uploading, the groups will be displayed here.</p>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById("generateGroups").addEventListener("click", () => {
+      const fileInput = document.getElementById("csvFile");
+      const groupSize = parseInt(document.getElementById("groupSize").value, 10);
+
+      if (!fileInput.files.length) {
+        alert("Please upload a CSV file first!");
+        return;
+      }
+      
+      const file = fileInput.files[0];
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          const data = results.data;
+          const updatedData = generateKaganGroups(data, groupSize);
+          displayGroups(updatedData.groups);
+          downloadUpdatedCSV(updatedData.updatedData);
+        }
+      });
+    });
+
+    function generateKaganGroups(data, groupSize) {
+      // Identify score and group columns
+      const scoreColumns = Object.keys(data[0]).filter(col => col.startsWith("score_"));
+      const groupColumns = Object.keys(data[0]).filter(col => col.startsWith("group_"));
+      const latestScore = scoreColumns[scoreColumns.length - 1];
+      const latestGroup = `group_${groupColumns.length + 1}`;
+
+      // Sort students by the latest score
+      data.sort((a, b) => b[latestScore] - a[latestScore]);
+
+      // Assign students to groups
+      const groups = [];
+      let currentGroup = [];
+      for (let i = 0; i < data.length; i++) {
+        currentGroup.push(data[i]);
+        if (currentGroup.length === groupSize || i === data.length - 1) {
+          groups.push(currentGroup);
+          currentGroup = [];
+        }
+      }
+
+      // Assign group colors
+      const colors = ["Red", "Blue", "Green", "Yellow", "Purple", "Orange"];
+      groups.forEach((group, index) => {
+        const color = colors[index % colors.length];
+        group.forEach(student => {
+          student[latestGroup] = color;
+        });
+      });
+
+      return { groups, updatedData: data };
+    }
+
+    function displayGroups(groups) {
+      const outputDiv = document.getElementById("output");
+      outputDiv.innerHTML = ""; // Clear previous output
+
+      groups.forEach((group, index) => {
+        const groupDiv = document.createElement("div");
+        groupDiv.className = "group";
+
+        const groupHeading = document.createElement("h2");
+        groupHeading.textContent = `Group ${index + 1}`;
+        groupDiv.appendChild(groupHeading);
+
+        const groupList = document.createElement("ul");
+        group.forEach(student => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${student["first name"]} ${student["surname"]}`;
+          groupList.appendChild(listItem);
+        });
+
+        groupDiv.appendChild(groupList);
+        outputDiv.appendChild(groupDiv);
+      });
+    }
+
+    function downloadUpdatedCSV(data) {
+      const csv = Papa.unparse(data);
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+
+      const downloadLink = document.getElementById("downloadLink");
+      downloadLink.href = url;
+      downloadLink.download = "updated_kagan_groups.csv";
+      downloadLink.style.display = "inline";
+      downloadLink.textContent = "Download Updated CSV";
+    }
+  </script>
+</body>
+</html>
