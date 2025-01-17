@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kagan Groups Generator</title>
+  <title>Kagan Groups</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <style>
     body {
@@ -132,12 +132,21 @@
         }
       }
 
+      // Handle small groups left over
+      const lastGroup = groups[groups.length - 1];
+      if (lastGroup.length < groupSize - 1) {
+        groups.pop(); // Remove the small group
+        for (let student of lastGroup) {
+          groups.sort((a, b) => a.length - b.length)[0].push(student); // Redistribute into smallest groups
+        }
+      }
+
       // Assign group colors
       const colors = ["Red", "Blue", "Green", "Yellow", "Purple", "Orange"];
       groups.forEach((group, index) => {
         const color = colors[index % colors.length];
         group.forEach(student => {
-          student[`group_${groupColumns.length + 1}`] = color;
+          student[latestGroup] = color;
         });
       });
 
