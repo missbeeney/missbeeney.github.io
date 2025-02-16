@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Skills Intervention Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .tab { display: none; }
+        .active { display: block; }
+        .tab-button { padding: 12px; margin: 5px; cursor: pointer; font-weight: bold; }
+        .tab-button.active { background-color: #4a90e2; color: white; border-radius: 5px; }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-5xl mx-auto bg-white shadow-lg rounded-lg p-6">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Social Skills Intervention Program</h1><div class="flex justify-center space-x-4">
+        <button class="tab-button active" onclick="showTab('ta-guide')">TA Guide</button>
+        <button class="tab-button" onclick="showTab('delivery')">Delivery Presentation</button>
+        <button class="tab-button" onclick="showTab('worksheets')">Student Worksheets</button>
+    </div>
+    
+    <!-- TA Guide Section -->
+    <div id="ta-guide" class="tab active p-6">
+        <h2 class="text-2xl font-semibold text-gray-700">TA Guide</h2>
+        <p class="mt-4 text-gray-600">This section provides detailed instructions for the TA delivering the session, including objectives, key discussion points, and facilitation techniques.</p>
+        <ul class="list-disc list-inside mt-4 text-gray-600">
+            <li>Encourage active participation and create a safe space.</li>
+            <li>Use open-ended questions to promote discussion.</li>
+            <li>Maintain flexibility while following the structured plan.</li>
+        </ul>
+        
+        <h3 class="text-xl font-semibold mt-6">Week-by-Week Breakdown</h3>
+        <ul class="list-decimal list-inside mt-4 text-gray-600">
+            <li><b>Week 1:</b> Understanding Ourselves - Self-esteem and identity.</li>
+            <li><b>Week 2:</b> Healthy Friendships - Boundaries and support.</li>
+            <li><b>Week 3:</b> Communication - Assertiveness and conflict resolution.</li>
+            <li><b>Week 4:</b> Handling Conflict - Strategies for resolution.</li>
+            <li><b>Week 5:</b> Peer Pressure - Recognizing and resisting negative influence.</li>
+            <li><b>Week 6:</b> Moving Forward - Confidence building and action plan.</li>
+        </ul>
+    </div>
+    
+    <!-- Delivery Presentation Section -->
+    <div id="delivery" class="tab p-6">
+        <h2 class="text-2xl font-semibold text-gray-700">Delivery Presentation</h2>
+        <p class="mt-4 text-gray-600">This section is designed to be displayed during the session, providing a structured flow for discussions and activities.</p>
+        
+        <h3 class="text-xl font-semibold mt-6">Session Slides</h3>
+        <ul class="list-decimal list-inside mt-4 text-gray-600">
+            <li>Understanding Strengths - Self-reflection worksheet.</li>
+            <li>Healthy Friendships - Discussion and role-play exercises.</li>
+            <li>Effective Communication - Assertiveness training.</li>
+            <li>Handling Conflict - Problem-solving activities.</li>
+            <li>Peer Pressure - Resisting negative influences.</li>
+            <li>Building Confidence - Action planning for the future.</li>
+        </ul>
+    </div>
+    
+    <!-- Student Worksheets Section -->
+    <div id="worksheets" class="tab p-6">
+        <h2 class="text-2xl font-semibold text-gray-700">Student Worksheets</h2>
+        <p class="mt-4 text-gray-600">Click below to download worksheets for each session.</p>
+        <div class="mt-4 space-y-2">
+            <a href="#" class="block text-blue-600 underline">Week 1: Understanding Ourselves</a>
+            <a href="#" class="block text-blue-600 underline">Week 2: Friendships</a>
+            <a href="#" class="block text-blue-600 underline">Week 3: Communication</a>
+            <a href="#" class="block text-blue-600 underline">Week 4: Conflict Resolution</a>
+            <a href="#" class="block text-blue-600 underline">Week 5: Peer Pressure</a>
+            <a href="#" class="block text-blue-600 underline">Week 6: Moving Forward</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showTab(tabId) {
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-button').forEach(button => button.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        document.querySelector(`button[onclick="showTab('${tabId}')"]`).classList.add('active');
+    }
+</script>
+
+</body>
+</html>
